@@ -359,6 +359,73 @@ app.get('/api/speakText', async (req, res) => {
   }
 });
 
+////////////
+
+app.post('/api/speakTextv2', async (req, res) => {
+  await getToken()
+  const text = req.query.text;
+  const volume = req.query.volume;
+  const playerId = req.query.playerId;
+
+  const speakTextRes = res;
+  speakTextRes.setHeader('Content-Type', 'application/json');
+  if (authRequired) {
+    res.send(JSON.stringify({'success':false,authRequired:true}));
+  }
+
+  if (text == null || playerId == null) { // Return if either is null
+    speakTextRes.send(JSON.stringify({'success':false,error: 'Missing Parameters'}));
+    return;
+  }
+
+  let speechUrl;
+
+  try { // Let's make a call to the google tts api and get the url for our TTS file
+    speechUrl = await googleTTS(text, config.GOOGLE_TTS_LANGUAGE, 1);
+  }
+  catch (err) {
+    speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
+    return;
+  }
+
+  let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
+  if(volume != null) {
+    body.volume = parseInt(volume)
+  }
+
+  let audioClipRes;
+
+  try { // And call the audioclip API, with the playerId in the url path, and the text in the JSON body
+    audioClipRes = await fetch(`https://api.ws.sonos.com/control/api/v1/players/${playerId}/audioClip`, {
+     method: 'POST',
+      body:    JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token.token.access_token}` },
+    });
+  }
+  catch (err) {
+    speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
+    return;
+  }
+
+  const audioClipResText = await audioClipRes.text(); // Same thing as above: convert to text, since occasionally the Sonos API returns text
+
+  try  {
+    const json = JSON.parse(audioClipResText);
+    if (json.id !== undefined) {
+      speakTextRes.send(JSON.stringify({'success': true}));
+    }
+    else {
+      speakTextRes.send(JSON.stringify({'success': false, 'error':json.errorCode}));
+    }
+  }
+  catch (err){
+    speakTextRes.send(JSON.stringify({'success':false, 'error': audioClipResText}));
+  }
+});
+
+
+/////////
+
 app.get('/api/playClip', async (req, res) => {
   await getToken()
   const streamUrl = req.query.streamUrl;
