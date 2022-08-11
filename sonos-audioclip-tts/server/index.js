@@ -498,5 +498,5 @@ app.get('/api/playClip', async (req, res) => {
 });
 
 app.listen(8349, () =>
-  console.log('Express server is running on localhost:8349')
+  console.log('Express server is running on localhost:8349 version 1827')
 );
