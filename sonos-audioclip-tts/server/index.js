@@ -305,6 +305,8 @@ app.get('/api/speakText', async (req, res) => {
   const playerId = req.query.playerId;
   const lang = req.query.lang ? req.query.lang : config.GOOGLE_TTS_LANGUAGE
 
+  res.log.info(JSON.stringify(req.query))
+
   const speakTextRes = res;
   speakTextRes.setHeader('Content-Type', 'application/json');
   if (authRequired) {
