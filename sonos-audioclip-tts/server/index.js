@@ -371,12 +371,12 @@ app.get('/api/speakText', async (req, res) => {
 //   res.sendStatus(200)
 // });
 
-app.post('/api/speakTextv2', async (req, res) => {
+app.get('/api/playAudio', async (req, res) => {
   await getToken()
   
-  req.log.info(JSON.stringify(req.body))
+  // req.log.info(JSON.stringify(req.body))
 
-  const text = req.body.text;
+  // const text = req.body.text;
   const volume = req.body.volume;
   const playerId = req.body.playerId;
 
@@ -400,6 +400,8 @@ app.post('/api/speakTextv2', async (req, res) => {
     speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
     return;
   }
+
+  speechUrl = "https://open.spotify.com/track/51PDnTFcl1Vd0at4U6ISbI?si=af9f677886994fe2"
 
   let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
   if(volume != null) {
