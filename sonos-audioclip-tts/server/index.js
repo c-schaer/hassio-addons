@@ -401,7 +401,7 @@ app.get('/api/playAudio', async (req, res) => {
   //   return;
   // }
 
-  speechUrl = "https://open.spotify.com/track/51PDnTFcl1Vd0at4U6ISbI?si=af9f677886994fe2"
+  speechUrl = "http://192.168.1.68:8123/local/stuttgartcathedral.mp3"
 
   let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
   if(volume != null) {
