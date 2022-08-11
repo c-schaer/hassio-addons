@@ -364,7 +364,7 @@ app.get('/api/speakText', async (req, res) => {
 app.post('/api/speakTextv2', async (req, res) => {
   await getToken()
   
-  console.log(req)
+  console.log(req.body)
 
   const text = req.body.text;
   const volume = req.body.volume;
