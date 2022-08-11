@@ -380,8 +380,8 @@ app.get('/api/playAudio', async (req, res) => {
   const volume = req.body.volume;
   const playerId = req.body.playerId;
 
-  // const speakTextRes = res;
-  // speakTextRes.setHeader('Content-Type', 'application/json');
+  const speakTextRes = res;
+  speakTextRes.setHeader('Content-Type', 'application/json');
   // if (authRequired) {
   //   res.send(JSON.stringify({'success':false,authRequired:true}));
   // }
@@ -391,7 +391,7 @@ app.get('/api/playAudio', async (req, res) => {
   //   return;
   // }
 
-  // let speechUrl;
+  let speechUrl;
 
   // try { // Let's make a call to the google tts api and get the url for our TTS file
   //   speechUrl = await googleTTS(text, config.GOOGLE_TTS_LANGUAGE, 1);
@@ -407,6 +407,7 @@ app.get('/api/playAudio', async (req, res) => {
   if(volume != null) {
     body.volume = parseInt(volume)
   }
+  req.log.info('flag1')
 
   let audioClipRes;
 
@@ -421,6 +422,7 @@ app.get('/api/playAudio', async (req, res) => {
     speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
     return;
   }
+  req.log.info('flag2')
 
   const audioClipResText = await audioClipRes.text(); // Same thing as above: convert to text, since occasionally the Sonos API returns text
 
