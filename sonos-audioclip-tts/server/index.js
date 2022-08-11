@@ -363,8 +363,8 @@ app.get('/api/speakText', async (req, res) => {
 ////////////
 
 app.post('/api/testbed', async (req, res) => {
-  console.log('fuck')
-  console.log(res)
+  req.log.info('I swear to god')
+  req.log.info(res)
   res.sendStatus(200)
 });
 
