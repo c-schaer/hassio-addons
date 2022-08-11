@@ -363,9 +363,10 @@ app.get('/api/speakText', async (req, res) => {
 ////////////
 
 app.post('/api/testbed', async (req, res) => {
-  console.log(req.body)
-  res.send(req.body)
-})
+  console.log('fuck')
+  console.log(res)
+  res.sendStatus(200)
+});
 
 app.post('/api/speakTextv2', async (req, res) => {
   await getToken()
