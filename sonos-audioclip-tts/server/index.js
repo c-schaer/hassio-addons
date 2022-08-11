@@ -363,9 +363,12 @@ app.get('/api/speakText', async (req, res) => {
 
 app.post('/api/speakTextv2', async (req, res) => {
   await getToken()
-  const text = req.query.text;
-  const volume = req.query.volume;
-  const playerId = req.query.playerId;
+  
+  console.log(req)
+
+  const text = req.body.text;
+  const volume = req.body.volume;
+  const playerId = req.body.playerId;
 
   const speakTextRes = res;
   speakTextRes.setHeader('Content-Type', 'application/json');
