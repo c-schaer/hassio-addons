@@ -376,30 +376,30 @@ app.get('/api/playAudio', async (req, res) => {
   
   // req.log.info(JSON.stringify(req.body))
 
-  // const text = req.body.text;
+  const text = req.body.text;
   const volume = req.body.volume;
   const playerId = req.body.playerId;
 
-  const speakTextRes = res;
-  speakTextRes.setHeader('Content-Type', 'application/json');
-  if (authRequired) {
-    res.send(JSON.stringify({'success':false,authRequired:true}));
-  }
+  // const speakTextRes = res;
+  // speakTextRes.setHeader('Content-Type', 'application/json');
+  // if (authRequired) {
+  //   res.send(JSON.stringify({'success':false,authRequired:true}));
+  // }
 
-  if (text == null || playerId == null) { // Return if either is null
-    speakTextRes.send(JSON.stringify({'success':false,error: 'Missing Parameters'}));
-    return;
-  }
+  // if (text == null || playerId == null) { // Return if either is null
+  //   speakTextRes.send(JSON.stringify({'success':false,error: 'Missing Parameters'}));
+  //   return;
+  // }
 
-  let speechUrl;
+  // let speechUrl;
 
-  try { // Let's make a call to the google tts api and get the url for our TTS file
-    speechUrl = await googleTTS(text, config.GOOGLE_TTS_LANGUAGE, 1);
-  }
-  catch (err) {
-    speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
-    return;
-  }
+  // try { // Let's make a call to the google tts api and get the url for our TTS file
+  //   speechUrl = await googleTTS(text, config.GOOGLE_TTS_LANGUAGE, 1);
+  // }
+  // catch (err) {
+  //   speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
+  //   return;
+  // }
 
   speechUrl = "https://open.spotify.com/track/51PDnTFcl1Vd0at4U6ISbI?si=af9f677886994fe2"
 
