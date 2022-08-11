@@ -362,16 +362,16 @@ app.get('/api/speakText', async (req, res) => {
 
 ////////////
 
-app.post('/api/testbed', async (req, res) => {
-  req.log.info('I swear to god')
-  req.log.info(res)
-  res.sendStatus(200)
-});
+// app.post('/api/testbed', async (req, res) => {
+//   req.log.info('I swear to god')
+//   req.log.info(res)
+//   res.sendStatus(200)
+// });
 
 app.post('/api/speakTextv2', async (req, res) => {
   await getToken()
   
-  console.log(req.body)
+  req.log.info(JSON.stringify(req.body))
 
   const text = req.body.text;
   const volume = req.body.volume;
