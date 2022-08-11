@@ -303,6 +303,7 @@ app.get('/api/speakText', async (req, res) => {
   const text = req.query.text;
   const volume = req.query.volume;
   const playerId = req.query.playerId;
+  const lang = req.query.lang ? req.query.lang : config.GOOGLE_TTS_LANGUAGE
 
   const speakTextRes = res;
   speakTextRes.setHeader('Content-Type', 'application/json');
@@ -318,7 +319,7 @@ app.get('/api/speakText', async (req, res) => {
   let speechUrl;
 
   try { // Let's make a call to the google tts api and get the url for our TTS file
-    speechUrl = await googleTTS(text, config.GOOGLE_TTS_LANGUAGE, 1);
+    speechUrl = await googleTTS(text, lang, 1);
   }
   catch (err) {
     speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
