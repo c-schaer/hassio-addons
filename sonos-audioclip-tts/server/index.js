@@ -103,7 +103,7 @@ app.get('/auth', async (req, res) => {
 // redirect service parsing the authorization token and asking for the access token
 app.get('/redirect', async (req, res) => {
   const code = req.query.code;
-  const redirect_uri = '192.168.1.68:8349/redirect';
+  const redirect_uri = 'https://hassio.local:8349/redirect';
 
   const options = {
     code,redirect_uri,
