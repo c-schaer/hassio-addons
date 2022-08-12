@@ -412,7 +412,7 @@ app.get('/api/playAudio', async (req, res) => {
   let audioClipRes;
 
   try { // And call the audioclip API, with the playerId in the url path, and the text in the JSON body
-    audioClipRes = await fetch(`https://api.ws.sonos.com/control/api/v1/players/${playerId}/audioClip`, {
+    audioClipRes = await fetch(`https://api.ws.sonos.com/control/api/v1/players/${playerId}/loadAudioClip`, {
      method: 'POST',
       body:    JSON.stringify(body),
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token.token.access_token}` },
