@@ -63,7 +63,7 @@ const oauth2 = simpleOauthModule.create({
 
 // Authorization uri definition
 const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'https://hassio.local:8349/redirect',
+  redirect_uri: 'http://homeassistant.local:8349/redirect',
   scope: 'playback-control-all',
   state: 'none',
 });
@@ -103,7 +103,7 @@ app.get('/auth', async (req, res) => {
 // redirect service parsing the authorization token and asking for the access token
 app.get('/redirect', async (req, res) => {
   const code = req.query.code;
-  const redirect_uri = 'https://hassio.local:8349/redirect';
+  const redirect_uri = 'http://homeassistant.local:8349/redirect';
 
   const options = {
     code,redirect_uri,
@@ -498,5 +498,5 @@ app.get('/api/playClip', async (req, res) => {
 });
 
 app.listen(8349, () =>
-  console.log('Express server is running on localhost:8349 version 0933')
+  console.log('Express server is running on localhost:8349 version 1938')
 );
