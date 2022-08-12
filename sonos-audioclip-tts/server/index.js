@@ -63,7 +63,7 @@ const oauth2 = simpleOauthModule.create({
 
 // Authorization uri definition
 const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: '192.168.1.68:8349/redirect',
+  redirect_uri: 'https://hassio.local:8349/redirect',
   scope: 'playback-control-all',
   state: 'none',
 });
