@@ -373,8 +373,6 @@ app.get('/api/speakText', async (req, res) => {
 
 app.get('/api/playAudio', async (req, res) => {
   await getToken()
-  
-  // req.log.info(JSON.stringify(req.body))
 
   const volume = req.query.volume;
   const playerId = req.query.playerId;
@@ -382,30 +380,10 @@ app.get('/api/playAudio', async (req, res) => {
 
   const speakTextRes = res;
   speakTextRes.setHeader('Content-Type', 'application/json');
-  // if (authRequired) {
-  //   res.send(JSON.stringify({'success':false,authRequired:true}));
-  // }
 
-  // if (text == null || playerId == null) { // Return if either is null
-  //   speakTextRes.send(JSON.stringify({'success':false,error: 'Missing Parameters'}));
-  //   return;
-  // }
+  req.log.info(url)
 
-  let speechUrl;
-
-  // try { // Let's make a call to the google tts api and get the url for our TTS file
-  //   speechUrl = await googleTTS(text, config.GOOGLE_TTS_LANGUAGE, 1);
-  // }
-  // catch (err) {
-  //   speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
-  //   return;
-  // }
-
-  speechUrl = "https://schaer.haus/local/stuttgartcathedral.mp3"
-
-  req.log.info(speechUrl)
-
-  let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
+  let body = { streamUrl: url, name: 'Local Clip', appId: 'cam.schaer.haus' };
   if(volume != null) {
     body.volume = parseInt(volume)
   }
@@ -501,5 +479,5 @@ app.get('/api/playClip', async (req, res) => {
 });
 
 app.listen(8349, () =>
-  console.log('Express server is running on localhost:8349 version 2047')
+  console.log('Express server is running on localhost:8349 version 2150')
 );
