@@ -376,9 +376,9 @@ app.get('/api/playAudio', async (req, res) => {
   
   // req.log.info(JSON.stringify(req.body))
 
-  const text = req.body.text;
-  const volume = req.body.volume;
-  const playerId = req.body.playerId;
+  const volume = req.query.volume;
+  const playerId = req.query.playerId;
+  const url = req.query.file
 
   const speakTextRes = res;
   speakTextRes.setHeader('Content-Type', 'application/json');
@@ -402,6 +402,8 @@ app.get('/api/playAudio', async (req, res) => {
   // }
 
   speechUrl = "https://schaer.haus/local/stuttgartcathedral.mp3"
+
+  req.log.info(speechUrl)
 
   let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
   if(volume != null) {
@@ -498,5 +500,5 @@ app.get('/api/playClip', async (req, res) => {
 });
 
 app.listen(8349, () =>
-  console.log('Express server is running on localhost:8349 version 1938')
+  console.log('Express server is running on localhost:8349 version 2006')
 );
