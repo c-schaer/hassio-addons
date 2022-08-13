@@ -401,7 +401,7 @@ app.get('/api/playAudio', async (req, res) => {
   //   return;
   // }
 
-  speechUrl = "http://192.168.1.68:8123/local/stuttgartcathedral.mp3"
+  speechUrl = "https://schaer.haus/local/stuttgartcathedral.mp3"
 
   let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
   if(volume != null) {
