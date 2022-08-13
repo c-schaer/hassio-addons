@@ -419,14 +419,15 @@ app.get('/api/playAudio', async (req, res) => {
       body:    JSON.stringify(body),
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token.token.access_token}` },
     });
-  }
+  }  
   catch (err) {
     speakTextRes.send(JSON.stringify({'success':false,error: err.stack}));
     return;
   }
   req.log.info('flag2')
-
+  
   const audioClipResText = await audioClipRes.text(); // Same thing as above: convert to text, since occasionally the Sonos API returns text
+  req.log.info(audioClipResText)
 
   try  {
     const json = JSON.parse(audioClipResText);
@@ -500,5 +501,5 @@ app.get('/api/playClip', async (req, res) => {
 });
 
 app.listen(8349, () =>
-  console.log('Express server is running on localhost:8349 version 2006')
+  console.log('Express server is running on localhost:8349 version 2047')
 );
