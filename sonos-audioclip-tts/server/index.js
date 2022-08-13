@@ -328,7 +328,7 @@ app.get('/api/speakText', async (req, res) => {
     return;
   }
 
-  let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'com.me.sonosspeech' };
+  let body = { streamUrl: speechUrl, name: 'Sonos TTS', appId: 'cam.schaer.haus' };
   if(volume != null) {
     body.volume = parseInt(volume)
   }
@@ -392,7 +392,7 @@ app.get('/api/playAudio', async (req, res) => {
   let audioClipRes;
 
   try { // And call the audioclip API, with the playerId in the url path, and the text in the JSON body
-    audioClipRes = await fetch(`https://api.ws.sonos.com/control/api/v1/players/${playerId}/loadAudioClip`, {
+    audioClipRes = await fetch(`https://api.ws.sonos.com/control/api/v1/players/${playerId}/audioClip`, {
      method: 'POST',
       body:    JSON.stringify(body),
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token.token.access_token}` },
@@ -479,5 +479,5 @@ app.get('/api/playClip', async (req, res) => {
 });
 
 app.listen(8349, () =>
-  console.log('Express server is running on localhost:8349 version 2150')
+  console.log('Express server is running on localhost:8349 version 2158')
 );
